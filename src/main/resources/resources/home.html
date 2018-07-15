@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YfuitGenenrate</title>
+    <script src="static/vue.js" ></script>
+    <script src="jquery.min.js" ></script>
+</head>
+<body style="margin: 0;padding: 0;">
+
+<div id="headDiv">
+    <form target="iframeView" action="/generate.html" >
+        <input placeholder="tableName"  name="tableName" />
+        <input placeholder="packageName"  name="packageName" />
+        <br/>
+        <input name="method" value="Controller" type="button" />
+        <input name="method" value="Service" type="button" />
+        <input name="method" value="ServiceImpl" type="button" />
+        <input name="method"value="Dao" type="button" />
+        <input name="method" value="Mapper" type="button" />
+    </form>
+</div>
+
+<textarea id="textDiv" style="min-height:650px;width: 100%;"></textarea>
+
+<script type="text/javascript">
+
+    $('[name=method]').click(function(){
+
+        $.post("/generate.html",
+
+         {packageName:$("[name=packageName]").val(),tableName:$("[name=tableName]").val(),method:$(this).val()})
+
+         .success(function (data) {
+            $("#textDiv").val(data);
+         });
+    })
+
+</script>
+
+
+
+</body>
+</html>
